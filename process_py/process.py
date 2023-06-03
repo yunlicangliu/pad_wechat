@@ -4,11 +4,6 @@ def find_diff(member_path,attend_path,phone_path):
     attends = {}
     phones = []
     members = {}
-    with open(phone_path) as f:
-        for line in f:
-            if line:
-                line = line.strip()
-                phones.append(line)
     with open(member_path) as f:
         for line in f:
             if line:
@@ -21,6 +16,13 @@ def find_diff(member_path,attend_path,phone_path):
                 line = line.strip()
                 attends[line]=phones[i]
                 i+=1
+    with open(phone_path) as f:
+        for line in f:
+            if line:
+                line = line.strip()
+                phones.append(line)
+    if not phones:
+        phones = ['' for _ in attends]
     not_in_members = [] # 需要拉进群 
     not_in_attends = [] # 需要改名字的人
     for name in attends.keys():
